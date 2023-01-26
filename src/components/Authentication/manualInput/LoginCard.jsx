@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import styles from './input.module.css'
 
-import { sendPasswordResetLink, signInUser } from '../authenticationService.js'
-import { OverlayDialog } from '../../overlayDialog/overlayDialog'
+import { signInUser } from '../authenticationService.js'
 import ForgotPassword from './ForgotPassword'
+import { selectAuthenticationState } from '../AuthSlice.js'
 
+import EmailNotVerified from './EmailNotVerified.jsx'
+import { useSelector } from 'react-redux'
 
 export const LoginCard = () => {
     const [credentails, setCredentails] = useState({
@@ -15,10 +17,14 @@ export const LoginCard = () => {
 
     const [showForgotPass, setShowForgotPass] = useState(false)
 
+    const authenticationState = useSelector(selectAuthenticationState)
+
 
 
     return (
         <div className="card">
+            {authenticationState.confirmEmail && (<EmailNotVerified/>)}
+            
             <div className="card__header">
                 <h3>SignIn to your account</h3>
             </div>

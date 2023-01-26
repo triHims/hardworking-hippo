@@ -11,8 +11,7 @@ import { useSelector } from 'react-redux'
 import { selectAuthenticationState } from '../components/Authentication/AuthSlice.js'
 
 
-import { initializeAuthentication } from '../components/Authentication/authenticationService.js'
-import EmailNotVerified from '../components/Authentication/manualInput/EmailNotVerified';
+import { initializeAuthentication, isUserAuthenticated } from '../components/Authentication/authenticationService.js'
 
 
 
@@ -34,7 +33,7 @@ export default function MiddleWare({ children }) {
     const isAllow = () => {
         /* console.log(JSON.parse(authenticationState.authUser)?.email) */
         /* console.log(authenticationState) */
-        return !matchRoutes(location.pathname) || JSON.parse(authenticationState.authUser)?.email;
+        return !matchRoutes(location.pathname) || isUserAuthenticated();
     };
 
     if (authenticationState.isLoading) {
@@ -58,7 +57,6 @@ export default function MiddleWare({ children }) {
                     <AuthInput />
                 )
             }
-            <EmailNotVerified/>
         </>)
 
 

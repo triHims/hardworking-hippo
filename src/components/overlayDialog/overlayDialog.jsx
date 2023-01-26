@@ -13,8 +13,8 @@ const loaderHTML = (children) => {
                 <div className={authStyles.overlayDoor} />
 
                 <div className={overlayStyles.outcard}>
-                    <div class="card">
-                        <div class="card__body">
+                    <div className="card">
+                        <div className="card__body">
                             {children}
                         </div>
                     </div>

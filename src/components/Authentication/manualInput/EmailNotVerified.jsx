@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { OverlayDialog } from '../../overlayDialog/overlayDialog'
 import styles from '../auth.module.css'
+import { sendConfirmEmail, waitUntilEmailIsConfrimed } from '../authenticationService'
 
 
 const loadingFix = {
@@ -9,6 +10,10 @@ const loadingFix = {
 }
 
 const EmailNotVerified = () => {
+    useEffect(() => {
+        waitUntilEmailIsConfrimed()
+    },
+        [])
     const dataHtml = (
 
         <div className={styles.loader}>
@@ -23,6 +28,9 @@ const EmailNotVerified = () => {
             <p>
                 Please verify your email
             </p>
+            <button class="button button--outline button--warning" onClick={
+                () => sendConfirmEmail()
+            }>Resend Mail</button>
         </OverlayDialog>
     )
 }

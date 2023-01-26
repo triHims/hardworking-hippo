@@ -6,11 +6,6 @@ import { signInWithFaceBook, signInWithGoogle } from './authenticationService'
 
 function AuthInput(props) {
     const [isSignUp, setIsSignUp] = useState(false)
-    const setLoadingCallMethod = (method) => {
-        const { loadingHandle } = props
-        loadingHandle(true)
-        method()
-    }
     return (
         <>
             <div className={styles.login}>

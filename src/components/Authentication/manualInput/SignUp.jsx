@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { createInUser } from '../authenticationService';
 import styles from './input.module.css'
-import {createUser} from '../auth_firebase'
+
 
 const SignUp = () => {
     const [credentails, setCredentails] = useState({
@@ -15,9 +16,10 @@ const SignUp = () => {
         if(password!=confirmPassword){
             setErrorMessage("Passwords do not match")
             setIsError(true)
+            return;
         }
 
-        createUser(email,password);
+        createInUser(email,password);
 
     }
 

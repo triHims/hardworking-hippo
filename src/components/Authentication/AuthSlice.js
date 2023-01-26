@@ -25,7 +25,8 @@ export const authSlice = createSlice({
 
         emailNotConfirm: (_,action) => ({
             isLoading: false,
-            authUser: action.payload
+            authUser: action.payload,
+            confirmEmail: true
         }),
     }
 })

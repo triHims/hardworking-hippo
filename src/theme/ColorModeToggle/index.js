@@ -1,10 +1,10 @@
 import React from 'react';
 import ColorModeToggle from '@theme-original/ColorModeToggle';
-import { logout } from '../../components/Authentication/authenticationService';
+import { isUserAuthenticated, logout } from '../../components/Authentication/authenticationService';
 
 import { useSelector } from 'react-redux'
 
-import {selectAuthenticationState} from '../../components/Authentication/AuthSlice.js'
+import { selectAuthenticationState } from '../../components/Authentication/AuthSlice.js'
 
 
 
@@ -12,9 +12,15 @@ export default function ColorModeToggleWrapper(props) {
     const authenticationState = useSelector(selectAuthenticationState)
 
 
-    const logoutHTML = (<a style={{ marginRight: 15, cursor: "pointer", color: '#222222' }} onClick={() => logout()}>
-        Logout
-    </a>
+    const logoutHTML = (
+        <>
+            <a style={{ marginRight: 15, cursor: "pointer", color: '#222222' }} onClick={() => window.location.assign('/changePassword')}>
+                Change Password
+            </a>
+            <a style={{ marginRight: 15, cursor: "pointer", color: '#222222' }} onClick={() => logout()}>
+                Logout
+            </a>
+        </>
     )
 
 
@@ -26,7 +32,7 @@ export default function ColorModeToggleWrapper(props) {
     const isAllow = () => {
         /* console.log(JSON.parse(authenticationState.authUser)?.email) */
         /* console.log(authenticationState) */
-        return !!JSON.parse(authenticationState.authUser)?.email;
+        return isUserAuthenticated();
     };
 
     return (
