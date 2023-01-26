@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { signInWithGoogle, signInWithFacebook } from './auth'
 import styles from './auth.module.css'
 import { LoginCard } from './manualInput/LoginCard'
 import SignUp from './manualInput/SignUp'
+import { signInWithFaceBook, signInWithGoogle } from './authenticationService'
 
 function AuthInput(props) {
     const [isSignUp, setIsSignUp] = useState(false)
-    const setLoadingCallMethod =(method)=>{
-        const {loadingHandle}  = props
-        loadingHandle.setLoading(true)
-
+    const setLoadingCallMethod = (method) => {
+        const { loadingHandle } = props
+        loadingHandle(true)
         method()
     }
     return (
@@ -21,7 +20,7 @@ function AuthInput(props) {
                         <div className={styles.auth_card}>
 
                             {
-                                isSignUp ? (<SignUp {... props}/>) : (<LoginCard {... props}/>)
+                                isSignUp ? (<SignUp {...props} />) : (<LoginCard {...props} />)
                             }
 
 
@@ -31,10 +30,10 @@ function AuthInput(props) {
                             </ul>
                         </div>
                         <hr className={styles.hr_tabbed} />
-                        <button className={`${styles.login__btn} ${styles.login__google}`} onClick={()=>setLoadingCallMethod(signInWithGoogle)}>
+                        <button className={`${styles.login__btn} ${styles.login__google}`} onClick={() => signInWithGoogle()}>
                             Login with Google
                         </button>
-                        <button className={`${styles.login__btn} ${styles.login__fb}`} onClick={()=>setLoadingCallMethod(signInWithFacebook)}>
+                        <button className={`${styles.login__btn} ${styles.login__fb}`} onClick={() => signInWithFaceBook()}>
                             Login with Facebook
                         </button>
 

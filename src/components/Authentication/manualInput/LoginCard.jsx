@@ -1,7 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './input.module.css'
 
-export const LoginCard = ({loadingHandle}) => {
+import { sendPasswordResetLink, signInUser } from '../authenticationService.js'
+import { OverlayDialog } from '../../overlayDialog/overlayDialog'
+import ForgotPassword from './ForgotPassword'
+
+
+export const LoginCard = () => {
+    const [credentails, setCredentails] = useState({
+        email: '',
+        password: '',
+    })
+
+
+    const [showForgotPass, setShowForgotPass] = useState(false)
+
+
+
     return (
         <div className="card">
             <div className="card__header">
@@ -9,25 +24,23 @@ export const LoginCard = ({loadingHandle}) => {
             </div>
             <div className="card__body">
                 <div className={styles.input_box}>
-                    <label htmlFor="email">Email</label><br/>
-                    <input type="text" className={styles.input_text} name="" id="" />
+                    <label htmlFor="email">Email</label><br />
+                    <input type="text" className={styles.input_text} value={credentails.email}
+                        onChange={(e) => setCredentails({ ...credentails, email: e.target.value, })} />
                 </div>
                 <div className={styles.input_box}>
                     <label htmlFor="password">Password</label>
-                    <input type="text" className={styles.input_text} name="" id="" />
+                    <input type="password" className={styles.input_text} value={credentails.password}
+                        onChange={(e) => setCredentails({ ...credentails, password: e.target.value, })} />
                 </div>
                 <div className={styles.input_box_forgot}>
-                    <a href="http://">forgot password ?</a>
+                    <a onClick={() => setShowForgotPass(true)} >forgot password ?</a>
                 </div>
             </div>
             <div className="card__footer">
-                <button className="button button--secondary button--block" onClick={()=>{
-                    console.log("laoding before "+loadingHandle.isLoading)
-                    loadingHandle.setLoading(true)
-                    console.log("setLoaidn called")
-                    console.log("laoding after "+loadingHandle.isLoading)
-                }}>Log in</button>
+                <button className="button button--secondary button--block" onClick={() => signInUser(credentails.email, credentails.password)}>Log in</button>
             </div>
+            {showForgotPass && <ForgotPassword closeFn={() => setShowForgotPass(false)} />}
         </div>
     )
 }
