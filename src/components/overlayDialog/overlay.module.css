@@ -1,0 +1,35 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100000000;
+    
+}
+
+.overlayContainer{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(181, 181, 181, 0.6);
+
+
+}
+
+
+.outcard{
+    padding: 20px;
+    background-color: white;
+    max-width: 50vh;
+}
+
+
+.closeButton{
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+
+}

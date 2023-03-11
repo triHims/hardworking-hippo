@@ -1,0 +1,1 @@
+export const STRIPE_PK = process.env.STRIPE_PK
